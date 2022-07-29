@@ -1,6 +1,9 @@
+// CSS
+// import styles from './About.modules.css';
+
 function About() {
   return (
-    <div>About</div>
+    <h1>About</h1>
   )
 }
 

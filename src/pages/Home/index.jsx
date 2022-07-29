@@ -1,8 +1,9 @@
-import React from 'react'
+// CSS
+// import styles from './Home.modules.css';
 
 function Home() {
   return (
-    <div>Home</div>
+    <h1>Home</h1>
   )
 }
 
