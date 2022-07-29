@@ -1,10 +1,14 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
   return (
-    <div className="container">
-      <h1>Miniblog</h1>
-    </div>
+    <BrowserRouter>
+      <div class="container">
+        <Routes>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
