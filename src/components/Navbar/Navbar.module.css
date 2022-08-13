@@ -9,6 +9,7 @@
 .brand {
   font-weight: 900;
   text-transform: uppercase;
+
 }
 
 .links_list {
@@ -20,6 +21,7 @@
   margin-right: 1em;
 }
 
+/* NavLink é como se fosse a */
 .links_list li a {
   padding: .4em .6em;
 }
