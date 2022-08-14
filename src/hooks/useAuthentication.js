@@ -1,3 +1,4 @@
+// Mesmo sem usar, preciso importar, como uma foram da aplicação reconhecer
 import { db } from '../firebase/config';
 
 import {
@@ -9,6 +10,7 @@ import {
 } from 'firebase/auth';
 
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null);
@@ -30,6 +32,7 @@ export const useAuthentication = () => {
     checkIfIsCancelled();
 
     setLoading(true);
+    setError(null);
 
     try {
 
@@ -43,6 +46,8 @@ export const useAuthentication = () => {
         displayName: data.displayName
       });
 
+      setLoading(false);
+
       return user;
 
     } catch (error) {
@@ -54,11 +59,16 @@ export const useAuthentication = () => {
 
       if (error.message.includes("Password")) {
         systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres"
+      } else if(error.message.includes("email-already")) {
+        systemErrorMessage = "E-mail já cadastrado."
+      } else {
+        systemErrorMessage = "Ocorreu um erro. Por favor, tente mais tarde."
       };
 
+      setLoading(false);
+      setError(systemErrorMessage);
+      
     }
-
-    setLoading(false);
 
   };
 
