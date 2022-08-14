@@ -1,8 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+// mapeia se a autenticação do susuário foi feita com sucesso
+import { onAuthStateChanged } from 'firebase/auth';
+
+// kooks
+import { useState, useEffect } from 'react';
+import { useAuthentication } from './hooks/useAuthentication';
+
 // context
-import AuthProvider from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 
 //components
 import Navbar from './components/Navbar';
@@ -18,11 +25,27 @@ import NotFound from './pages/NotFound';
 
 
 function App() {
+  const [user, setUser] = useState(undefined);
+  const { auth } = useAuthentication();
+
+  const loadingUser = user === undefined;
+
+  // mesmo não vindo o usuário, irá vir algo diferente de "undefined" e sairá do Loding
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, [auth]);
+
+  if (loadingUser) {
+    return <p>Carregando...</p>
+  }
+
   return (
     <AuthProvider>
       <BrowserRouter>
         <Navbar />
-        <div class="container">
+        <div className="container">
           <Routes>
             <Route path='/' element={ <Home /> }/>
             <Route path='/login' element={ <Login /> }/>
