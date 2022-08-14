@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
+// context
+import AuthProvider from './context/AuthContext';
+
 //components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -16,19 +19,21 @@ import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div class="container">
-        <Routes>
-          <Route path='/' element={ <Home /> }/>
-          <Route path='/login' element={ <Login /> }/>
-          <Route path='/register' element={ <Register /> }/>
-          <Route path='/about' element={ <About /> }/>
-          <Route path='*' element={ <NotFound/> } />
-        </Routes>
-      </div>
-      <Footer />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Navbar />
+        <div class="container">
+          <Routes>
+            <Route path='/' element={ <Home /> }/>
+            <Route path='/login' element={ <Login /> }/>
+            <Route path='/register' element={ <Register /> }/>
+            <Route path='/about' element={ <About /> }/>
+            <Route path='*' element={ <NotFound/> } />
+          </Routes>
+        </div>
+        <Footer />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
