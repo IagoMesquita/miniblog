@@ -1,0 +1,7 @@
+.container {
+  background: rgb(41, 40, 40);
+  color: aliceblue;
+  font-weight: bold;
+  height: 500px;
+  width: 10vh;
+}
