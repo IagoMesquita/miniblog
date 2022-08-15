@@ -20,6 +20,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import About from './pages/About';
+import Dashboard from './pages/Dashboard';
+import CreatePost from './pages/CreatePost';
 
 import NotFound from './pages/NotFound';
 
@@ -51,6 +53,8 @@ function App() {
             <Route path='/login' element={ <Login /> }/>
             <Route path='/register' element={ <Register /> }/>
             <Route path='/about' element={ <About /> }/>
+            <Route path='/dashboard' element={ <Dashboard/> } />
+            <Route path='posts/createPost' element={ <CreatePost/> } />
             <Route path='*' element={ <NotFound/> } />
           </Routes>
         </div>
