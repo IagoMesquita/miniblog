@@ -4,13 +4,12 @@ import { db } from '../firebase/config';
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   updateProfile,
+  signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null);
