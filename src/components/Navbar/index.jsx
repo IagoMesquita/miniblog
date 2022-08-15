@@ -28,6 +28,16 @@ function Navbar() {
             </li>
           </>
         )}
+         { user && (
+          <>
+            <li>
+              < NavLink to='/posts/create' className={ ({ isActive }) =>  isActive ? styles.active : undefined  }>Novo Post</ NavLink>
+            </li>
+            <li>
+              < NavLink to='/dashboard' className={ ({ isActive }) =>  isActive ? styles.active : undefined  }>Dashboard</ NavLink>
+            </li>
+          </>
+        )}
         <li>
           < NavLink to='/about' className={ ({ isActive }) =>  isActive ? styles.active : undefined  }>About</ NavLink>
         </li>
