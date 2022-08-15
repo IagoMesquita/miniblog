@@ -50,11 +50,11 @@ function App() {
         <div className="container">
           <Routes>
             <Route path='/' element={ <Home /> }/>
-            <Route path='/login' element={ <Login /> }/>
-            <Route path='/register' element={ <Register /> }/>
+            <Route path='/login' element={ !user ? <Login /> : <Navigate to='/'/>}/>
+            <Route path='/register' element={ !user ? <Register /> : <Navigate to='/' />}/>
             <Route path='/about' element={ <About /> }/>
-            <Route path='/dashboard' element={ <Dashboard/> } />
-            <Route path='posts/createPost' element={ <CreatePost/> } />
+            <Route path='/dashboard' element={ user ?  <Dashboard/> : <Navigate to='/login' /> } />
+            <Route path='posts/create' element={ user ? <CreatePost/> : <Navigate to='/login'/> } />
             <Route path='*' element={ <NotFound/> } />
           </Routes>
         </div>
