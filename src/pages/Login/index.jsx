@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAuthentication } from '../../hooks/useAuthentication';
 
@@ -9,9 +9,9 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const { loading, error: authError,  } = useAuthentication();
+  const { login, loading, error: authError,  } = useAuthentication();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError('');
@@ -21,8 +21,15 @@ export default function Login() {
       password
     };
 
-
+    const res = await login(user);
+    console.log(res);
   };
+
+  useEffect(() => {
+    if(authError) {
+      setError(authError);
+    }
+  }, [authError]);
 
   return (
     <div className={ styles.login }>
