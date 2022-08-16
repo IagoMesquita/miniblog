@@ -1,4 +1,9 @@
+import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
+
+import { useAuthValue } from '../../context/AuthContext'
+
+import { useInsertDocument }from '../../hooks/useInsertDocument';
 
 import styles from './CreatePost.module.css';
 
@@ -9,8 +14,33 @@ function CreatePost() {
   const [tags, setTags] = useState([]);
   const [formError, setFormError] = useState("");
 
+  const { insertDocument, response } = useInsertDocument("posts");
+
+  // ContextApi 
+  const { user } = useAuthValue();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    setFormError("");
+
+    // validate image URL
+
+    // criar o array de tags
+
+    // checar todos os valores
+    const post = {
+      title,
+      image,
+      body,
+      tags,
+      uid: user.uid,
+      createdBy: user.displayName,
+    };
+
+    insertDocument(post);
+
+    // redirect to home page
     
   };
 
@@ -62,14 +92,13 @@ function CreatePost() {
             required
           />
         </label>
-        <button className='btn'>Criar</button>
-        {/* {
-          !loading && <button className='btn'>Cadastrar</button>
+        {
+          !response.loading && <button className='btn'>Cadastrar</button>
         }
         {
-          loading && <button disabled="true" className='btn'>Aguarde...</button>
+          response.loading && <button disabled="true" className='btn'>Aguarde...</button>
         }
-        { error && <p className='error'>{error}</p> } */}
+        { response.error && <p className='error'>{response.error}</p> }
       </form>
     </div>
   )
