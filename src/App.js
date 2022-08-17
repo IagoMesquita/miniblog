@@ -20,6 +20,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import About from './pages/About';
+import Search from './pages/Search';
 import Dashboard from './pages/Dashboard';
 import CreatePost from './pages/CreatePost';
 
@@ -53,6 +54,7 @@ function App() {
             <Route path='/login' element={ !user ? <Login /> : <Navigate to='/'/>}/>
             <Route path='/register' element={ !user ? <Register /> : <Navigate to='/' />}/>
             <Route path='/about' element={ <About /> }/>
+            <Route path='/search' element={ <Search /> }/>
             <Route path='/dashboard' element={ user ?  <Dashboard/> : <Navigate to='/login' /> } />
             <Route path='posts/create' element={ user ? <CreatePost/> : <Navigate to='/login'/> } />
             <Route path='*' element={ <NotFound/> } />
