@@ -23,11 +23,15 @@ export const useFetchDocuments = (docCollection, search=null, uid=null) => {
       try {
         let q;
 
-        // busca
         // dashboard
-
+        
+        // busca
         // methodos do Firebase
-        q = await query(collectionRef, orderBy("createdAt", "desc"));
+        if(search){
+          q = await query(collectionRef, where("tags", "array-contains", search))
+        } else{
+          q = await query(collectionRef, orderBy("createdAt", "desc"));
+        }
 
         // onSnapshot: mapeia os dados, sempre que um dado for alterado, ele traz esses dados atualizados.
         await onSnapshot(q, (querySnapshot) => {
