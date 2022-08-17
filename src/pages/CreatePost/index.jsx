@@ -1,5 +1,6 @@
-import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 import { useAuthValue } from '../../context/AuthContext'
 
@@ -16,6 +17,8 @@ function CreatePost() {
 
   const { insertDocument, response } = useInsertDocument("posts");
 
+  const navigate = useNavigate();
+
   // ContextApi 
   const { user } = useAuthValue();
 
@@ -25,15 +28,28 @@ function CreatePost() {
     setFormError("");
 
     // validate image URL
-
+    try {
+      new URL(image)
+    } catch (error) {
+      setFormError("A imagem precisa ser uma URL.")
+    }
+    
     // criar o array de tags
+    const tagsArray = tags.split(',')
+      .map((tag) => tag.toLowerCase().trim());
+    
+      // checar todos os valores
+      if (!title || !image || !tags || !body ) {
+        setFormError("Por favor, preench todos os campos.")
+      }
 
-    // checar todos os valores
+    if (formError) return;
+
     const post = {
       title,
       image,
       body,
-      tags,
+      tagsArray,
       uid: user.uid,
       createdBy: user.displayName,
     };
@@ -41,6 +57,7 @@ function CreatePost() {
     insertDocument(post);
 
     // redirect to home page
+    navigate('/');
     
   };
 
@@ -99,6 +116,7 @@ function CreatePost() {
           response.loading && <button disabled="true" className='btn'>Aguarde...</button>
         }
         { response.error && <p className='error'>{response.error}</p> }
+        { formError && <p className='error'>{formError}</p> }
       </form>
     </div>
   )
