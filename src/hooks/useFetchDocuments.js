@@ -18,7 +18,6 @@ export const useFetchDocuments = (docCollection, search=null, uid=null) => {
       setLoading(true);
 
       const collectionRef = await collection(db, docCollection);
-      console.log("Collection", collectionRef);
 
       try {
         let q;
@@ -28,7 +27,7 @@ export const useFetchDocuments = (docCollection, search=null, uid=null) => {
         // busca
         // methodos do Firebase
         if(search){
-          q = await query(collectionRef, where("tags", "array-contains", search))
+          q = await query(collectionRef, where("tagsArray", "array-contains", search), orderBy("createdAt", "desc"))
         } else{
           q = await query(collectionRef, orderBy("createdAt", "desc"));
         }
