@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 // hooks
 import { useAuthValue } from '../../context/AuthContext';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
+import { useDeleteDocument } from '../../hooks/useDeleteDocument';
 
 function Dashboard() {
   
@@ -12,10 +13,9 @@ function Dashboard() {
   const uid = user.uid;
   
   const { documents: posts, loading, error } = useFetchDocuments("posts", null, uid);
+  const { deleteDocument } = useDeleteDocument('posts')
 
-  const deleteDocument = (id) => {
-    console.log("deleta")
-  };
+
 
   if (loading) {
     return <p>Carregando...</p>
@@ -43,7 +43,7 @@ function Dashboard() {
             posts.map((post) => (
               <div key={ post.id }  className={ styles.post_row }>
                 <p>{post.title}</p>
-                <div>
+                <di>
                   <Link to={ `/posts/${post.id}` } className="btn btn-outline">
                     Ver
                   </Link>
@@ -56,7 +56,7 @@ function Dashboard() {
                   >
                     Excluir
                   </button>
-                </div>
+                </di>
               </div> ))}
        </>
        )}
