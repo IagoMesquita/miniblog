@@ -1,7 +1,5 @@
 import styles from './Dashboard.module.css'
 
-import { useState } from 'react';
-
 import { Link } from 'react-router-dom';
 
 // hooks
@@ -11,10 +9,11 @@ import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 function Dashboard() {
   
   const { user } = useAuthValue();
-  const uid = user.id;
-  // const  = useFetchDocuments("posts");
+  const uid = user.uid;
+  
+  const { documents: posts } = useFetchDocuments("posts", null, uid);
 
-  const [posts, setPosts] = useState([]);
+
 
   return (
     <div>
@@ -26,8 +25,8 @@ function Dashboard() {
         <Link to="/posts/create" className='btn'>Criar primeiro post</Link>
       </div>
      ) : (
-      <div>Algum Poste</div>
-     )}
+      posts && posts.map((post) => (<h2 key={post.title}>{post.title}</h2> ))
+       )}
     </div>
   )
 }
