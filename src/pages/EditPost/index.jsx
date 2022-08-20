@@ -4,12 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthValue } from '../../context/AuthContext'
 //hook
 import { useFetchDocument } from '../../hooks/useFetchDocument';
+import { useUpdateDocument } from '../../hooks/useUpdateDocument';
 
 import styles from './EditPost.module.css';
 
 function EditPost() {
   const { id } = useParams();
-  const { document: post, response } = useFetchDocument("posts", id);
+  const { document: post } = useFetchDocument("posts", id);
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
@@ -36,6 +37,8 @@ function EditPost() {
   // ContextApi 
   const { user } = useAuthValue();
 
+  const { updateDocument, response } = useUpdateDocument("posts");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -59,7 +62,7 @@ function EditPost() {
 
     if (formError) return;
 
-    const post = {
+    const data = {
       title,
       image,
       body,
@@ -68,9 +71,10 @@ function EditPost() {
       createdBy: user.displayName,
     };
 
-
+    updateDocument(id, data);
+    
     // redirect to home page
-    navigate('/');
+    navigate('/dashboard');
     
   };
 
