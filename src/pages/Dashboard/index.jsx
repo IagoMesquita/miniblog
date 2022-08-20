@@ -43,7 +43,7 @@ function Dashboard() {
             posts.map((post) => (
               <div key={ post.id }  className={ styles.post_row }>
                 <p>{post.title}</p>
-                <di>
+                <div>
                   <Link to={ `/posts/${post.id}` } className="btn btn-outline">
                     Ver
                   </Link>
@@ -56,8 +56,9 @@ function Dashboard() {
                   >
                     Excluir
                   </button>
-                </di>
-              </div> ))}
+                </div>
+              </div> 
+            ))}
        </>
        )}
     </div>
