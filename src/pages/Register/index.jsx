@@ -92,7 +92,7 @@ function Register() {
           !loading && <button className='btn'>Cadastrar</button>
         }
         {
-          loading && <button disabled="true" className='btn'>Aguarde...</button>
+          loading && <button disabled={true} className='btn'>Aguarde...</button>
         }
         { error && <p className='error'>{error}</p> }
       </form>
