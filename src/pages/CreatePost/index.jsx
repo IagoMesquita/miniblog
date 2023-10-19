@@ -113,7 +113,7 @@ function CreatePost() {
           !response.loading && <button className='btn'>Cadastrar</button>
         }
         {
-          response.loading && <button disabled="true" className='btn'>Aguarde...</button>
+          response.loading && <button disabled={true} className='btn'>Aguarde...</button>
         }
         { response.error && <p className='error'>{response.error}</p> }
         { formError && <p className='error'>{formError}</p> }

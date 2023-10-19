@@ -62,7 +62,7 @@ export default function Login() {
           !loading && <button className='btn'>Entrar</button>
         }
         {
-          loading && <button disabled="true" className='btn'>Aguarde...</button>
+          loading && <button disabled={true} className='btn'>Aguarde...</button>
         }
         { error && <p className='error'>{error}</p> }
       </form>
